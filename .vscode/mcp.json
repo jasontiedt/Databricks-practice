@@ -1,0 +1,20 @@
+{
+  "servers": {
+    "databricks": {
+      "command": "uvx",
+      "args": ["databricks-mcp-server"],
+      "env": {
+        "DATABRICKS_HOST": "${input:databricksHost}",
+        "DATABRICKS_TOKEN": "${input:databricksToken}",
+        "DATABRICKS_WAREHOUSE_ID": "${input:warehouseId}",
+        "DATABRICKS_CATALOG": "main",
+        "DATABRICKS_SCHEMA": "silver"
+      }
+    }
+  },
+  "inputs": [
+    { "id": "databricksHost",  "type": "promptString", "description": "Workspace URL" },
+    { "id": "databricksToken", "type": "promptString", "description": "Databricks PAT", "password": true },
+    { "id": "warehouseId",     "type": "promptString", "description": "SQL Warehouse ID" }
+  ]
+}
