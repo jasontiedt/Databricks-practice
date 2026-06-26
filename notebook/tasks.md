@@ -38,6 +38,7 @@ section.
 | [/profile-table](../.github/prompts/profile-table.prompt.md) | Per-column null/distinct/min/max profile + issue flags | Task 2.1, 5.1 |
 | [/visualize-column](../.github/prompts/visualize-column.prompt.md) | Auto-picks histogram / bar / line for a single column | Task 2.2, 3.2 |
 | [/correlate-columns](../.github/prompts/correlate-columns.prompt.md) | Pearson correlation + scatter for two numeric columns | Task 2.2 |
+| [/top-sales-by-customer](../.github/prompts/top-sales-by-customer.prompt.md) | Grounds a sales table, then returns the top customers by total sales | Task 2.3, 5.1 |
 | [/time-series-report](../.github/prompts/time-series-report.prompt.md) | Daily + monthly rollup with trend chart and anomalies | Task 2.5, 5.1 |
 | [/data-quality-audit](../.github/prompts/data-quality-audit.prompt.md) | Schema-wide null/dup/orphan/freshness audit | Task 2.6, 5.1 |
 | [/nl-to-sql](../.github/prompts/nl-to-sql.prompt.md) | Natural-language question → schema-grounded SQL | Task 1.3, 5.1 |
@@ -163,7 +164,7 @@ from this list so your work compounds.
 **Goal.** Internalize the prompt-file pattern by writing one that fits **your** data.
 
 **Steps.**
-1. Pick a task you find yourself repeating against your tables (e.g. "show top N grouped by some column for the last N days", "compare this period vs the same period last year", "find rows where two columns disagree").
+1. Pick a task you find yourself repeating against your tables (e.g. "show top N grouped by some column for the last N days", "compare this period vs the same period last year", "fetch top sales by customer from a sales table", "find rows where two columns disagree").
 2. Copy `.github/prompts/nl-to-sql.prompt.md` as a starting point and rename it.
 3. Edit the frontmatter `description` and replace the body with your own steps + output format.
 4. Use `${input:foo:default}` syntax for the variable parts — including `catalog` and `schema` so the prompt is reusable across environments.
@@ -384,7 +385,7 @@ from this list so your work compounds.
    - Use [`/explore-schema`](../.github/prompts/explore-schema.prompt.md) to refresh your map of the schema.
    - Pick the most relevant table and run [`/describe-table`](../.github/prompts/describe-table.prompt.md) on it.
    - Run [`/profile-table`](../.github/prompts/profile-table.prompt.md) on the same table; note any quality issue that would invalidate the answer.
-   - Use [`/nl-to-sql`](../.github/prompts/nl-to-sql.prompt.md) to generate the query. Save it to `queries/`.
+   - Use [`/nl-to-sql`](../.github/prompts/nl-to-sql.prompt.md) to generate the query, or use [`/top-sales-by-customer`](../.github/prompts/top-sales-by-customer.prompt.md) when the question is a customer sales leaderboard. Save the final SQL to `queries/`.
 2. **Sitting 2 — visualize + share (20 min).**
    - If your result has a date dimension, also run [`/time-series-report`](../.github/prompts/time-series-report.prompt.md) on it.
    - Use [`/visualize-column`](../.github/prompts/visualize-column.prompt.md) to pick the right chart for the headline metric.
